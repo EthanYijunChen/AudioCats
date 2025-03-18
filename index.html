@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cats-container">
+        <h1>Click to pet these cats!</h1>
+        <div class="cats-row">
+            <div class="cat-item">
+                <img src="HuhCat.png" alt="Cat 1" class="cat-image">
+                <button class="sound-button cat1" onclick="playSound('HuhCat')">Cat 1</button>
+            </div>
+            <div class="cat-item">
+                <img src="OiiCat.png" alt="Cat 2" class="cat-image">
+                <button class="sound-button cat2" onclick="playSound('OiiCat')">Cat 2</button>
+            </div>
+            <div class="cat-item">
+                <img src="BababoiCat.png" alt="Cat 3" class="cat-image">
+                <button class="sound-button cat3" onclick="playSound('BababoiCat')">Cat 3</button>
+            </div>
+            <div class="cat-item">
+                <img src="BananaCat.png" alt="Cat 4" class="cat-image">
+                <button class="sound-button cat4" onclick="playSound('BananaCat')">Cat 4</button>
+            </div>
+        </div>
+        <div class="playback-control">
+            <label for="playback-speed">Playback Speed: <span id="speed-value">1.0x</span></label>
+            <input type="range" id="playback-speed" min="0.5" max="3" step="0.1" value="1">
+        </div>
+    </div>
+
+    <audio id="HuhCat" src="HuhCat.m4a"></audio>
+    <audio id="OiiCat" src="OiiCat.m4a"></audio>
+    <audio id="BababoiCat" src="BababoiCat.m4a"></audio>
+    <audio id="BananaCat" src="BananaCat.m4a"></audio>
+
+    <script>
+        function playSound(soundId) {
+            const audio = document.getElementById(soundId);
+            audio.currentTime = 0;
+            audio.play();
+        }
+
+        const playbackSpeed = document.getElementById('playback-speed');
+        const speedValue = document.getElementById('speed-value');
+        const audios = document.querySelectorAll('audio');
+
+        playbackSpeed.addEventListener('input', function() {
+            const speed = playbackSpeed.value;
+            speedValue.textContent = `${speed}x`; 
+            audios.forEach(audio => {
+                audio.playbackRate = speed; 
+            });
+        });
+    </script>
+</body>
+</html>
